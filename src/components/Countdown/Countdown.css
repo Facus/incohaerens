@@ -1,0 +1,86 @@
+
+.center {
+    text-align: center;
+}
+
+@keyframes seconds {
+from { color: #ccc; }
+to { color: #333; }
+}
+
+.numbers {
+font-size: 4em;
+font-weight: 300;
+transition: all 0.2s;
+animation: seconds 1s initial;
+}
+
+.numbers:active {
+color: #ccc;
+}
+
+.countdown {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.buttons {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+}
+
+.btn {
+margin: 0px 2px;
+padding: 0px 100px;
+border-radius: 5px;
+border: 1px solid #ccc;
+background-color: #fafafa;
+color: #333;
+font-size: 1em;
+font-weight: 300;
+cursor: pointer;
+}
+
+.btn:hover {
+background-color: #f5f5f5;
+}
+
+.btn-play {
+margin: 5px;
+padding: 0px 70px;
+border-radius: 15px;
+border: 1px solid #ccc;
+background-color: #8f8;
+color: #333;
+font-size: 1em;
+font-weight: 300;
+cursor: pointer;
+}
+
+.btn-play:hover {
+background-color: rgba(136, 255, 136, 0.9);
+}
+
+.btn-reset {
+margin: 5px;
+padding: 0px 60px;
+border-radius: 15px;
+border: 1px solid #ccc;
+background-color: #f88;
+color: #333;
+font-size: 1em;
+font-weight: 300;
+cursor: pointer;
+}
+
+.btn-reset:hover {
+background-color: rgba(255, 136, 136, 0.9);
+}
+
+.separator {
+margin: 20px 10px;
+}
