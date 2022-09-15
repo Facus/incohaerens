@@ -24,7 +24,7 @@ const Countdown = () => {
     } else {
       if (minutes === 0) {
         setMinutes(59);
-        handleHours(false);
+        isPlaying && handleHours(false);
       } else {
         setMinutes(minutes - 1);
       }
@@ -37,7 +37,7 @@ const Countdown = () => {
     } else {
       if (seconds === 0) {
         setSeconds(59);
-        handleMinutes(false);
+        isPlaying && handleMinutes(false);
       }
       else {
         setSeconds(seconds - 1);
@@ -52,7 +52,6 @@ const Countdown = () => {
       setTimeInSeconds((hours * 3600) + (minutes * 60) + seconds);
       setIsPlaying(!isPlaying);
     }
-    console.log(`isPlaying: ${isPlaying} - ${timeInSeconds}`);
   }
 
   const handleReset = () => {
@@ -63,13 +62,13 @@ const Countdown = () => {
     setIsPlaying(false);
   }
 
-  useEffect(() => {
+  useEffect(() => {    
+    // console.log(`isPlaying: ${isPlaying}`);
     if (isPlaying) {
       const interval = setInterval(() => {
         if (timeInSeconds > 0) {
           setTimeInSeconds(timeInSeconds - 1);
           handleSeconds(false);
-          console.log(`tiempo restante: ${timeInSeconds}`);
         }
         if (timeInSeconds === 0) {
           setIsPlaying(false);
@@ -89,9 +88,9 @@ const Countdown = () => {
       <div className="countdown">
 
         <div className="buttons">
-          <button className='btn' onClick={() => handleHours(true)}>🡁</button>
-          <button className='btn' onClick={() => handleMinutes(true)}>🡁</button>
-          <button className='btn' onClick={() => handleSeconds(true)}>🡁</button>
+          <button className='btn' disabled={isPlaying} onClick={() => handleHours(true)}>🡁</button>
+          <button className='btn' disabled={isPlaying} onClick={() => handleMinutes(true)}>🡁</button>
+          <button className='btn' disabled={isPlaying} onClick={() => handleSeconds(true)}>🡁</button>
         </div>
 
         <div className='numbers'>
@@ -99,15 +98,22 @@ const Countdown = () => {
         </div>
 
         <div className="buttons">
-          <button className='btn' onClick={() => handleHours(false)}>🡃</button>
-          <button className='btn' onClick={() => handleMinutes(false)}>🡃</button>
-          <button className='btn' onClick={() => handleSeconds(false)}>🡃</button>
+          <button className='btn' disabled={isPlaying} onClick={() => handleHours(false)}>🡃</button>
+          <button className='btn' disabled={isPlaying} onClick={() => handleMinutes(false)}>🡃</button>
+          <button className='btn' disabled={isPlaying} onClick={() => handleSeconds(false)}>🡃</button>
         </div>
 
+        <div className="separator"> </div>
+
         <div className="buttons">
-          <button className='btn-play' onClick={() => handlePlaying()}>{isPlaying ? "Pause" : "Start"}</button>
-          <button className='btn-reset' onClick={() => handleReset()}>Reset</button>
+          { isPlaying
+            ? <button className='btn-pause' onClick={() => handlePlaying()}>PAUSE</button>
+            : <button className='btn-play' onClick={() => handlePlaying()}>START</button>
+          }
+          <button className='btn-reset' onClick={() => handleReset()}>RESET</button>
         </div>
+
+        <div className="separator"> </div>
 
       </div>
     </>

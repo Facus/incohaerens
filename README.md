@@ -2,7 +2,7 @@
 
 ![incohaerens-banner](/src/img/Incohaerens-banner.png)
 
-This project aims to bring together several mini projects that I am developing as a practice.
+This project aims to bring together several mini projects that I am developing as a practice.\
 Visit [this link](https://incohaerens.netlify.app/) to view a demo.
 
 # Getting Started with Create React App

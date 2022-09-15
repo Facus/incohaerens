@@ -1,6 +1,6 @@
 import { React } from 'react';
 import './App.css';
-import logo from './img/inconsistency.jpg';
+import logo from './img/inconsistency.png';
 import Countdown from './components/Countdown/Countdown';
 
 function App() {
