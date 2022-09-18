@@ -89,6 +89,15 @@
     color: #444;
 }
 
+.play-sound span {
+    font-size: 16px;
+    border-bottom: solid 2px #2F4B2699;
+    padding: 1px 17px 2px 7px;
+    border-radius: 20px;
+    background-color: #C7EFCF;
+    color: #2F4B26bb;
+}
+
 .separator {
     margin: 15px 10px;
 }

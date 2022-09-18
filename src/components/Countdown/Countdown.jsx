@@ -1,5 +1,8 @@
 import { React, useEffect, useState } from 'react';
 import './Countdown.css';
+import sound from '../../sound/stop.mp3';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 const Countdown = () => {
 
@@ -9,6 +12,9 @@ const Countdown = () => {
 
   const [timeInSeconds, setTimeInSeconds] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const [isDone, setIsDone] = useState(false);
+  
 
   const handleHours = (up) => {
     if (up) {
@@ -50,6 +56,7 @@ const Countdown = () => {
       setIsPlaying(!isPlaying);
     } else {
       setTimeInSeconds((hours * 3600) + (minutes * 60) + seconds);
+      setIsDone(false);
       setIsPlaying(!isPlaying);
     }
   }
@@ -60,6 +67,7 @@ const Countdown = () => {
     setSeconds(0);
     setTimeInSeconds(0);
     setIsPlaying(false);
+    setIsDone(false);
   }
 
   useEffect(() => {    
@@ -72,8 +80,9 @@ const Countdown = () => {
         }
         if (timeInSeconds === 0) {
           setIsPlaying(false);
-          // play sound here 
-          alert('Stand Up!');
+          // when finished, the sound will play
+          setIsDone(true);
+          // alert('Stand Up!');
         }
       }, 1000);
       return () => clearInterval(interval);
@@ -88,9 +97,15 @@ const Countdown = () => {
       <div className="countdown">
 
         <div className="buttons">
-          <button className='btn' disabled={isPlaying} onClick={() => handleHours(true)}>🡁</button>
-          <button className='btn' disabled={isPlaying} onClick={() => handleMinutes(true)}>🡁</button>
-          <button className='btn' disabled={isPlaying} onClick={() => handleSeconds(true)}>🡁</button>
+          <button className='btn' disabled={isPlaying} onClick={() => handleHours(true)}>
+            <FontAwesomeIcon icon={faCaretUp} />
+          </button>
+          <button className='btn' disabled={isPlaying} onClick={() => handleMinutes(true)}>
+            <FontAwesomeIcon icon={faCaretUp} />
+          </button>
+          <button className='btn' disabled={isPlaying} onClick={() => handleSeconds(true)}>
+            <FontAwesomeIcon icon={faCaretUp} />
+          </button>
         </div>
 
         <div className='numbers'>
@@ -98,9 +113,15 @@ const Countdown = () => {
         </div>
 
         <div className="buttons">
-          <button className='btn' disabled={isPlaying} onClick={() => handleHours(false)}>🡃</button>
-          <button className='btn' disabled={isPlaying} onClick={() => handleMinutes(false)}>🡃</button>
-          <button className='btn' disabled={isPlaying} onClick={() => handleSeconds(false)}>🡃</button>
+          <button className='btn' disabled={isPlaying} onClick={() => handleHours(false)}>
+            <FontAwesomeIcon icon={faCaretDown} />
+          </button>
+          <button className='btn' disabled={isPlaying} onClick={() => handleMinutes(false)}>
+            <FontAwesomeIcon icon={faCaretDown} />
+          </button>
+          <button className='btn' disabled={isPlaying} onClick={() => handleSeconds(false)}>
+            <FontAwesomeIcon icon={faCaretDown} />
+          </button>
         </div>
 
         <div className="separator"> </div>
@@ -111,6 +132,11 @@ const Countdown = () => {
             : <button className='btn-play' onClick={() => handlePlaying()}>START</button>
           }
           <button className='btn-reset' onClick={() => handleReset()}>RESET</button>
+        </div>
+        
+        <div className="play-sound">
+          { isDone && <audio src={sound} type="audio/mp3" autoPlay> soy un audio </audio> }
+          { isPlaying && <span> <FontAwesomeIcon icon={faCircleInfo} /> When the time is up, a sound will be played</span> }
         </div>
 
         <div className="separator"> </div>
